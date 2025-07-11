@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 import { connection } from "../../lib/db";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/lib/auth";
-import { debug } from "console";
+
 
 export async function PUT(req: Request) {
-  console.debug("Api Used");
   try {
     if (!connection) {
       console.error("Errror :connection failed");

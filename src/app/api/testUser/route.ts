@@ -5,7 +5,6 @@ import { getServerSession } from "next-auth";
 import { authOption } from "@/app/lib/auth";
 
 export async function GET() {
-    console.debug("used api")
     if (!connection) {
       console.error("Errror :connection failed");
       return NextResponse.json(

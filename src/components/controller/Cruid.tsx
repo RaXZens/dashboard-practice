@@ -2,26 +2,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card, CardHeader } from "../ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table";
 
 interface user {
   id: number;
   email: string;
+  role: string;
+  created_at: string;
 }
-
-const TableHeaderdata = [
-  {
-    id: "id",
-    header: "Email",
-  },
-];
 
 const UsersPage = () => {
   const [users, setUsers] = useState<user[]>([]);
@@ -41,28 +28,44 @@ const UsersPage = () => {
       }
       const data = await response.json();
       setUsers(data.users); // เก็บข้อมูลใน state
+      // เก็บข้อมูลใน state
     };
     fetchUsers();
   }, []);
   return (
-    <div className="">
-      <Card className="w-full h-full">
-        <CardHeader>Users management</CardHeader>
-        <Table>
-          <TableHeader>
-            {TableHeaderdata.map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                <TableHead key={headerGroup.id}>{headerGroup.id}{headerGroup.header}</TableHead>
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {users.map((row) => (
-              <TableRow key={row.id}>{row.id}{row.email}</TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+    <div className="md:mx-30">
+      <div className="grid grid-cols-3 gap-5 mt-5">
+        <div className="ms-8">
+          <Card className="">
+            <CardHeader>Users management</CardHeader>
+          </Card>
+        </div>
+        <div className="col-span-2">
+          <Card className="mb-10">
+            <CardHeader>Users management</CardHeader>
+            <table className="w-full text-sm text-left">
+              <thead className="text-md text-gray-700 dark:text-white uppercase ">
+                <tr>
+                  <th className="px-6 py-3">Id</th>
+                  <th className="px-6 py-3">Email</th>
+                  <th className="px-6 py-3">Role</th>
+                  <th className="px-6 py-3">created_at</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((row) => (
+                  <tr className="border-b " key={row.id}>
+                    <th className="px-6 py-3">{row.id}</th>
+                    <td className="px-6 py-3">{row.email}</td>
+                    <td className="px-6 py-3">{row.role}</td>
+                    <td className="px-6 py-3">{row.created_at}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

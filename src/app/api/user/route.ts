@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { connection } from "../../lib/db";
 
 export async function GET() {
-  console.debug("API Route ถูกเรียกแล้ว");
   if (!connection) {
     console.error("Errror :connection failed");
     return NextResponse.json(
@@ -15,7 +14,7 @@ export async function GET() {
 
   try {
     const result = await connection.query(
-      "SELECT id,  email FROM users ORDER BY id ASC"
+      "SELECT id,email,role,created_at FROM users ORDER BY id ASC"
     );
     const SplituserResult = await connection.query(
       "SELECT role, COUNT(*) AS total_users FROM users GROUP BY role;"
@@ -41,7 +40,6 @@ export async function GET() {
 
     // หากมีคอลัมน์อื่น ๆ ที่อาจเป็น Date หรือ BigInt ให้จัดการตรงนี้ด้วย
     // เช่น: createdAt: user.created_at ? new Date(user.created_at).toISOString() : null,
-    console.debug(totalUsers);
     return NextResponse.json({ users, totalUsers, Splitusers });
   } catch (error) {
     console.error("Failed to fetch users:", error);

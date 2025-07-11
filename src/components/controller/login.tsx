@@ -62,8 +62,8 @@ export default function LoginPage() {
   return (
     <div className="">
       <NavbarPublic />
-        <div className="flex justify-center  ">
-          <Card className="w-full max-w-sm ">
+        <div className="flex justify-center">
+          <Card className="w-full max-w-sm mt-10">
             <CardHeader>
               <CardTitle>Login to your account</CardTitle>
               <CardDescription>
@@ -130,6 +130,6 @@ export default function LoginPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+        </div>
   );
 }

@@ -8,11 +8,9 @@ import {
 } from "../ui/chart";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { useEffect, useState } from "react";
+import { debug } from "console";
 
-
-const colors = [
-  "var(--chart-1)","var(--chart-2)"
-];
+const colors = ["var(--chart-1)", "var(--chart-2)"];
 
 const chartConfig = {
   visitors: {
@@ -64,7 +62,7 @@ const AddPieChart = () => {
       setTotalusers(data.totalUsers); // เก็บข้อมูลใน state
       setSplitUsers(data.Splitusers);
     };
-
+    
     fetchUsers();
   }, []);
 
@@ -88,8 +86,12 @@ const AddPieChart = () => {
             cy="50%"
             innerRadius={60}
             strokeWidth={5}
-          >{splitUsers.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          >
+            {splitUsers.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={colors[index % colors.length]}
+              />
             ))}
             <Label
               content={({ viewBox }) => {
@@ -130,8 +132,10 @@ const AddPieChart = () => {
           <User className="h-4 w-4 text-green-500" />
         </div>
         <div className="flex leading-none text-muted-foreground gap-2">
-          {splitUsers.map((users)=>(
-            <p key={users.role}>{users.role} : {users.total_users} </p>
+          {splitUsers.map((users) => (
+            <p key={users.role}>
+              {users.role} : {users.total_users}{" "}
+            </p>
           ))}
         </div>
       </div>
