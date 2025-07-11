@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card, CardHeader } from "../ui/card";
+import { CircleMinus } from "lucide-react";
 
 interface user {
   id: number;
@@ -32,18 +33,39 @@ const UsersPage = () => {
     };
     fetchUsers();
   }, []);
+
+  const handleDeleteUser = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/user/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setUsers(users.filter((user) => user.id !== id)); // อัปเดต state หลังจากลบ
+        alert("User deleted successfully");
+        window.location.reload(); // รีเฟรชหน้าเพื่อแสดงผลลัพธ์ที่อัปเดต
+      } else {
+        alert("Failed to delete user");
+      }
+    } catch {
+      alert("Failed to delete user");
+    }
+  };
+
   return (
-    <div className="md:mx-30">
-      <div className="grid grid-cols-3 gap-5 mt-5">
-        <div className="ms-8">
+    <div className="">
+      <div className="grid grid-cols-3 gap-5 mt-5 ms-1">
+        <div className="col-span-3 2xl:col-span-1 me-4 2xl:me-0">
           <Card className="">
             <CardHeader>Users management</CardHeader>
           </Card>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-3 2xl:col-span-2 me-4">
           <Card className="mb-10">
             <CardHeader>Users management</CardHeader>
-            <table className="w-full text-sm text-left">
+            <table className="w-full text-sm text-left table-auto">
               <thead className="text-md text-gray-700 dark:text-white uppercase ">
                 <tr>
                   <th className="px-6 py-3">Id</th>
@@ -59,6 +81,11 @@ const UsersPage = () => {
                     <td className="px-6 py-3">{row.email}</td>
                     <td className="px-6 py-3">{row.role}</td>
                     <td className="px-6 py-3">{row.created_at}</td>
+                    <td className="px-6 py-3">
+                      <button className="btn cursor-pointer rounded-xl hover:bg-red-500 " onClick={() => handleDeleteUser(row.id)}>
+                        <CircleMinus />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
