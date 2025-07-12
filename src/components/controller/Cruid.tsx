@@ -56,16 +56,31 @@ const UsersPage = () => {
 
   return (
     <div className="">
-      <div className="grid grid-cols-3 gap-5 mt-5 ms-1">
-        <div className="col-span-3 2xl:col-span-1 me-4 2xl:me-0">
+      <div className="grid grid-cols-6 2xl:grid-cols-6 gap-5 mt-5 ms-1">
+        <div className="col-span-6 2xl:col-span-3 ">
           <Card className="">
             <CardHeader>Users management</CardHeader>
           </Card>
         </div>
-        <div className="col-span-3 2xl:col-span-2 me-4">
-          <Card className="mb-10">
+        <div className="col-span-2 2xl:col-span-1 ">
+          <Card className="">
             <CardHeader>Users management</CardHeader>
-            <table className="w-full text-sm text-left table-auto">
+          </Card>
+        </div>
+        <div className="col-span-2 2xl:col-span-1">
+          <Card className="">
+            <CardHeader>Users management</CardHeader>
+          </Card>
+        </div>
+        <div className="col-span-2 2xl:col-span-1">
+          <Card className="">
+            <CardHeader>Users management</CardHeader>
+          </Card>
+        </div>
+
+        <div className="col-span-6 2xl:col-span-6 me-4 ">
+          <Card className="mb-10">
+            <table className="w-full text-sm text-left">
               <thead className="text-md text-gray-700 dark:text-white uppercase ">
                 <tr>
                   <th className="px-6 py-3">Id</th>
