@@ -14,10 +14,10 @@ export async function GET() {
 
   try {
     const result = await connection.query(
-      "SELECT id,email,role,created_at FROM users ORDER BY id ASC"
+      "SELECT id,name,email,department,position FROM users ORDER BY id ASC"
     );
     const SplituserResult = await connection.query(
-      "SELECT role, COUNT(*) AS total_users FROM users GROUP BY role;"
+      "SELECT position, COUNT(*) AS total_users FROM users GROUP BY position;"
     );
     const CountUsersResult = await connection.query(
       "SELECT COUNT(*) AS total_users FROM users"
@@ -37,10 +37,10 @@ export async function GET() {
         { status: 500 }
       );
     }
-
     // หากมีคอลัมน์อื่น ๆ ที่อาจเป็น Date หรือ BigInt ให้จัดการตรงนี้ด้วย
     // เช่น: createdAt: user.created_at ? new Date(user.created_at).toISOString() : null,
     return NextResponse.json({ users, totalUsers, Splitusers });
+    
   } catch (error) {
     console.error("Failed to fetch users:", error);
     return NextResponse.json(

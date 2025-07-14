@@ -7,8 +7,9 @@ import { CircleMinus } from "lucide-react";
 interface user {
   id: number;
   email: string;
-  role: string;
-  created_at: string;
+  position: string;
+  department: string;
+  name: string;
 }
 
 const UsersPage = () => {
@@ -84,20 +85,20 @@ const UsersPage = () => {
               <thead className="text-md text-gray-700 dark:text-white uppercase ">
                 <tr>
                   <th className="px-6 py-3">Id</th>
-                  <th className="px-6 py-3">Email</th>
-                  <th className="px-6 py-3">Role</th>
-                  <th className="px-6 py-3">created_at</th>
+                  <th className="px-6 py-3">name</th>
+                  <th className="px-6 py-3">Department</th>
+                  <th className="px-6 py-3">Position</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((row) => (
                   <tr className="border-b " key={row.id}>
                     <th className="px-6 py-3">{row.id}</th>
-                    <td className="px-6 py-3">{row.email}</td>
-                    <td className="px-6 py-3">{row.role}</td>
-                    <td className="px-6 py-3">{row.created_at}</td>
+                    <td className="px-6 py-3">{row.name}</td>
+                    <td className="px-6 py-3">{row.department}</td>
+                    <td className="px-6 py-3">{row.position}</td>
                     <td className="px-6 py-3">
-                      <button className="btn cursor-pointer rounded-xl hover:bg-red-500 " onClick={() => handleDeleteUser(row.id)}>
+                      <button className="btn cursor-pointer rounded-xl text-red-400 " onClick={() => handleDeleteUser(row.id)}>
                         <CircleMinus />
                       </button>
                     </td>
