@@ -10,6 +10,7 @@ interface user {
   position: string;
   department: string;
   name: string;
+  salary: number;
 }
 
 const UsersPage = () => {
@@ -88,6 +89,7 @@ const UsersPage = () => {
                   <th className="px-6 py-3">name</th>
                   <th className="px-6 py-3">Department</th>
                   <th className="px-6 py-3">Position</th>
+                  <th className="px-6 py-3">Salaries</th>
                 </tr>
               </thead>
               <tbody>
@@ -97,6 +99,7 @@ const UsersPage = () => {
                     <td className="px-6 py-3">{row.name}</td>
                     <td className="px-6 py-3">{row.department}</td>
                     <td className="px-6 py-3">{row.position}</td>
+                    <td className="px-6 py-3">{row.salary}</td>
                     <td className="px-6 py-3">
                       <button className="btn cursor-pointer rounded-xl text-red-400 " onClick={() => handleDeleteUser(row.id)}>
                         <CircleMinus />

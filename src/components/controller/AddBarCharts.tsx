@@ -7,8 +7,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "../ui/chart";
-import { CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { useEffect } from "react";
+import { CardDescription} from "../ui/card";
+
 
 const chartData = [
   { month: "January", visitors: 186 },

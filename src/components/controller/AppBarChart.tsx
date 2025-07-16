@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
 const chartConfig = {
-  TotalSold: {
+  total_salaries: {
     label: "Total-Sold",
     color: "var(--chart-1)",
   },
@@ -25,8 +25,13 @@ const COLORS = [
   "var(--chart-5)",
 ];
 
+interface Product {
+  department: string;
+  total_salaries: number;
+}
+
 const AppBarChart = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,11 +40,14 @@ const AppBarChart = () => {
         throw new Error(`HTTP error status : ${response.status}`);
       }
       const data = await response.json();
-      const formatted = data.map((p: any) => ({
-        products: p.name,
-        TotalSold: p.total_sold,
+      const productsArray = data.TotalProducts.map((item: any) => ({
+        department: item.department,
+        total_salaries: item.total_salary
       }));
-      setProducts(formatted);
+
+      // คำนวณ grand total
+
+      setProducts(productsArray);
     };
     fetchProduct();
   }, []);
@@ -55,24 +63,24 @@ const AppBarChart = () => {
           margin={{
             left: -20,
           }}
-
         >
-          <XAxis type="number" dataKey="TotalSold" />
+          <XAxis type="number" dataKey="total_salaries" domain={[0, 200000]}/>
 
           <YAxis
-            dataKey="products"
+            dataKey="department"
             type="category"
             tickLine={false}
             tickMargin={5}
             axisLine={true}
             tickFormatter={(value) => value.slice(0, 3)}
+            
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Bar dataKey="TotalSold" radius={4}>
-            {products.map((entry, index) => (
+          <Bar dataKey="total_salaries" radius={4}>
+            {products.map((row, index) => (
               <Cell
-                key={`cell-${index}`}
+                key={`cell-${row.department}`}
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
