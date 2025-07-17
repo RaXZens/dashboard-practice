@@ -6,8 +6,8 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "../ui/chart";
-import { CardDescription} from "../ui/card";
+} from "./ui/chart";
+import { CardDescription} from "./ui/card";
 
 
 const chartData = [

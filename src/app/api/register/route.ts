@@ -6,6 +6,7 @@ export async function POST(req: Request) {
   try {
     if (!connection) {
       console.error("Errror :connection failed");
+      return NextResponse.json({ error: "Database connection not initialized" }, { status: 500 });
     }
 
     const body = await req.json();

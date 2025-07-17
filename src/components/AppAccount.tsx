@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "./ui/card";
 
 import { KeyRound, UserRoundPen } from "lucide-react";
 import Link from "next/link";

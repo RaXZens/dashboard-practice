@@ -5,7 +5,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "../ui/chart";
+} from "./ui/chart";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { useEffect, useState } from "react";
 import { debug } from "console";

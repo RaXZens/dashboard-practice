@@ -1,8 +1,19 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Card, CardHeader } from "../ui/card";
+import { Card, CardHeader } from "./ui/card";
 import { CircleMinus } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import AddEmployeesButton from "@/components/ui/AddEmployeesButton";
 
 interface user {
   id: number;
@@ -14,6 +25,9 @@ interface user {
 }
 
 const UsersPage = () => {
+  const [showStatusBar, setShowStatusBar] = React.useState(true);
+  const [showActivityBar, setShowActivityBar] = React.useState(false);
+
   const [users, setUsers] = useState<user[]>([]);
   const [show, setShow] = useState(true);
   useEffect(() => {
@@ -58,30 +72,43 @@ const UsersPage = () => {
 
   return (
     <div className="">
-      <div className="grid grid-cols-6 2xl:grid-cols-6 gap-5 mt-5 ms-1">
-        <div className="col-span-6 2xl:col-span-3 ">
-          <Card className="">
-            <CardHeader>Users management</CardHeader>
-          </Card>
-        </div>
-        <div className="col-span-2 2xl:col-span-1 ">
-          <Card className="">
-            <CardHeader>Users management</CardHeader>
-          </Card>
-        </div>
-        <div className="col-span-2 2xl:col-span-1">
-          <Card className="">
-            <CardHeader>Users management</CardHeader>
-          </Card>
-        </div>
-        <div className="col-span-2 2xl:col-span-1">
-          <Card className="">
-            <CardHeader>Users management</CardHeader>
-          </Card>
-        </div>
-
+      <div className="grid grid-cols-6 2xl:grid-cols-6 gap-5 ms-1">
+        <div className="col-span-6 2xl:col-span-6 "></div>
         <div className="col-span-6 2xl:col-span-6 me-4 ">
           <Card className="mb-10">
+            <div className="flex me-5 justify-between">
+              <AddEmployeesButton />
+              <div className="flex gap-0 ">
+                <div className="p-2 border-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>Sort by Salaries</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Billing</DropdownMenuItem>
+                      <DropdownMenuItem>Team</DropdownMenuItem>
+                      <DropdownMenuItem>Subscription</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                <div className="p-2 border-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      Sort By department
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Billing</DropdownMenuItem>
+                      <DropdownMenuItem>Team</DropdownMenuItem>
+                      <DropdownMenuItem>Subscription</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            </div>
             <table className="w-full text-sm text-left">
               <thead className="text-md text-gray-700 dark:text-white uppercase ">
                 <tr>
@@ -101,7 +128,10 @@ const UsersPage = () => {
                     <td className="px-6 py-3">{row.position}</td>
                     <td className="px-6 py-3">{row.salary}</td>
                     <td className="px-6 py-3">
-                      <button className="btn cursor-pointer rounded-xl text-red-400 " onClick={() => handleDeleteUser(row.id)}>
+                      <button
+                        className="btn cursor-pointer rounded-xl text-red-400 "
+                        onClick={() => handleDeleteUser(row.id)}
+                      >
                         <CircleMinus />
                       </button>
                     </td>
