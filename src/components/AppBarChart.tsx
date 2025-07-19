@@ -12,7 +12,7 @@ import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
 const chartConfig = {
   total_salaries: {
-    label: "Total-Sold",
+    label: "Total-Salaries : ",
     color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
@@ -25,13 +25,18 @@ const COLORS = [
   "var(--chart-5)",
 ];
 
-interface Product {
+interface totalsalariesByDepartment {
   department: string;
   total_salaries: number;
 }
 
+interface totalsalaries {
+  salaries: string;
+}
+
 const AppBarChart = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [ totalsalariesByDepartment, setTotalsalaries] = useState<totalsalariesByDepartment[]>([]);
+  const [ TotalSalaries, setTotalSalaries] = useState<totalsalaries[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,45 +45,46 @@ const AppBarChart = () => {
         throw new Error(`HTTP error status : ${response.status}`);
       }
       const data = await response.json();
-      const productsArray = data.TotalProducts.map((item: any) => ({
+      const totalsalariesByDepartment = data.TotalProducts.map((item: any) => ({
         department: item.department,
-        total_salaries: item.total_salary
+        total_salaries: item.total_salary,
       }));
-
-      // คำนวณ grand total
-
-      setProducts(productsArray);
+      setTotalSalaries(data.salaries)
+      setTotalsalaries(totalsalariesByDepartment);
     };
     fetchProduct();
   }, []);
 
   return (
     <div className="">
-      <h1 className="text-lg font-md mb-6">Top 5 Products</h1>
+      <h1 className="text-lg font-md mb-6">Total Salaries</h1>
+      <p className="text-sm font-light text-center mb-2">Total Salaries : {TotalSalaries[0]?.salaries}</p>
       <ChartContainer config={chartConfig}>
         <BarChart
           accessibilityLayer
-          data={products}
-          layout="vertical"
+          data={totalsalariesByDepartment}
+          layout="horizontal"
           margin={{
-            left: -20,
+            left: 20,
+            right: 30,
+            bottom: 70
           }}
         >
-          <XAxis type="number" dataKey="total_salaries" domain={[0, 200000]}/>
+          <XAxis type="category" dataKey="department" interval={0} textAnchor="end" angle={-45}/>
 
           <YAxis
-            dataKey="department"
-            type="category"
+            padding={{bottom:2}}
+            dataKey="total_salaries"
+            type="number"
             tickLine={false}
             tickMargin={5}
             axisLine={true}
-            tickFormatter={(value) => value.slice(0, 3)}
+            domain={[0, 400000]}
             
           />
           <ChartTooltip content={<ChartTooltipContent />} />
-          <ChartLegend content={<ChartLegendContent />} />
           <Bar dataKey="total_salaries" radius={4}>
-            {products.map((row, index) => (
+            {totalsalariesByDepartment.map((row, index) => (
               <Cell
                 key={`cell-${row.department}`}
                 fill={COLORS[index % COLORS.length]}

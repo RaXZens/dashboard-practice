@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "./button";
-import { fromTheme } from "tailwind-merge";
 
 function AddEmployeesButton() {
   const [openform, SetOpenform] = useState(false);
@@ -45,19 +44,19 @@ function AddEmployeesButton() {
 
   return (
     <div>
-      <button onClick={() => SetOpenform(true)} className="ms-5 p-2 border-2 ">
+      <Button onClick={() => SetOpenform(true)} className="ms-5 p-2 bg-green-500 hover:bg-green-600 ">
         Add New Employees{" "}
-      </button>
+      </Button>
       <div
-        className="absolute top-1/4 right-1/4 border-2 rounded-xl bg-white p-4 shadow-lg "
+        className="absolute top-1/4 right-1/4 border-2 rounded-xl p-4 shadow-lg bg-white dark:bg-card"
         id="form-controls"
         style={{
           display: openform === true ? "block" : "none",
         }}
       >
         <h1 className="mb-4">Add Employees form</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="flex gap-2 items-center">
+        <form onSubmit={handleSubmit} >
+          <div className="flex gap-2 items-center ">
             <div className="flex flex-col gap-2 mb-4 ">
               <Label htmlFor="name">Name </Label>
               <Input
@@ -73,13 +72,13 @@ function AddEmployeesButton() {
               <Label htmlFor="department">Department </Label>
               <select
                 id="department"
-                className="border-1 rounded-md shadow-xs p-1.5"
+                className="border-1 rounded-md shadow-xs p-1.5 dark:bg-card "
                 value={formData.department}
                 onChange={(e) =>
                   setFormData({ ...formData, department: e.target.value })
                 }
               >
-                <option value="Null">Select Department</option>
+                <option value="Null" >Select Department</option>
                 <option value="IT & Technology">IT & Technology</option>
                 <option value="Sales">Sales</option>
                 <option value="Production/Operations">Production/Operations</option>
@@ -91,7 +90,7 @@ function AddEmployeesButton() {
               <Label htmlFor="position">Position </Label>
               <select
                 id="department"
-                className="border-1 rounded-md shadow-xs p-1.5"
+                className="border-1 rounded-md shadow-xs p-1.5 dark:bg-card "
                 value={formData.position}
                 onChange={(e) =>
                   setFormData({ ...formData, position: e.target.value })
@@ -118,10 +117,10 @@ function AddEmployeesButton() {
               />
             </div>
             <div className="flex gap-1">
-              <Button className="rounded-lg">Add</Button>
+              <Button className="rounded-lg  bg-green-500 hover:bg-green-600">Add</Button>
               <Button
                 onClick={handleClose}
-                className="bg-gray-400 rounded-lg"
+                variant={"outline"}
               >
                 Cancel
               </Button>

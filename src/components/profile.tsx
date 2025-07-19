@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ChevronLeft, UserRoundPen } from "lucide-react";
+import { ChevronLeft, UserCog, UserRoundPen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -85,7 +85,7 @@ function Profile()  {
                 }}
               >
                 <div className="flex">
-                  <div className="bg-gray-100 p-20  m-5 rounded-full"></div>
+                  <div className=" p-20  m-5 rounded-full"><UserCog/></div>
                   <div className="flex flex-col gap-2 justify-center">
                     <Button>Change Picture</Button>
                     <Button>Delete Picture</Button>

@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Card, CardHeader } from "./ui/card";
-import { CircleMinus } from "lucide-react";
+import { Card } from "./ui/card";
+import { CircleMinus, Ghost } from "lucide-react";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -23,32 +22,61 @@ interface user {
   name: string;
   salary: number;
 }
+const salaryRanges = [
+  { label: "Show All", value: "all" },
+  { label: "10,000 - 20,000", value: "10000-20000" },
+  { label: "20,000 - 30,000", value: "20000-30000" },
+  { label: "30,000 - 50,000", value: "30000-50000" },
+  { label: "60000 Or More", value: "60000<" },
+];
+const SelectDepartment = [
+  { label: "All Departments", value: "all" },
+  { label: "IT & Technology", value: "IT%20%26%20Technology" },
+  { label: "Sales", value: "Sales" },
+  { label: "Production/Operations", value: "Production/Operations" },
+  { label: "Marketing", value: "Marketing" },
+];
 
 const UsersPage = () => {
-  const [showStatusBar, setShowStatusBar] = React.useState(true);
-  const [showActivityBar, setShowActivityBar] = React.useState(false);
-
+  const [selectedSalaryRange, setSelectedSalaryRange] = useState<string>("all");
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
   const [users, setUsers] = useState<user[]>([]);
-  const [show, setShow] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
-    }, 3000);
-  }, []);
+  const [selectedOption, setSelectedOption] = useState<string>("");
+
+  const fetchUsers = async () => {
+    const response = await fetch("/api/user", { method: "GET" });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    setUsers(data.users); // เก็บข้อมูลใน state
+    // เก็บข้อมูลใน state
+  };
+
+  const fetchFilteredUsers = async (
+    salariesRange: string,
+    department: string
+  ) => {
+    try {
+      const res = await fetch(
+        `/api/user/filters?salariesRange=${salariesRange}&department=${department}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await res.json();
+      setUsers(data.users); // เก็บข้อมูลใน state
+    } catch (error) {
+      console.error("Failed to fetch users by salary range:", error);
+    }
+  };
 
   useEffect(() => {
     // ดึงข้อมูลจาก API
-    const fetchUsers = async () => {
-      const response = await fetch("/api/user", { method: "GET" });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setUsers(data.users); // เก็บข้อมูลใน state
-      // เก็บข้อมูลใน state
-    };
-    fetchUsers();
-  }, []);
+    if (selectedSalaryRange === "all" && selectedDepartment === "all") {
+      fetchUsers();
+    } else fetchFilteredUsers(selectedSalaryRange, selectedDepartment);
+  }, [selectedSalaryRange, selectedDepartment]);
 
   const handleDeleteUser = async (id: number) => {
     if (!confirm("Are you sure you want to delete this user?")) {
@@ -78,35 +106,46 @@ const UsersPage = () => {
           <Card className="mb-10">
             <div className="flex me-5 justify-between">
               <AddEmployeesButton />
-              <div className="flex gap-0 ">
-                <div className="p-2 border-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>Sort by Salaries</DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Billing</DropdownMenuItem>
-                      <DropdownMenuItem>Team</DropdownMenuItem>
-                      <DropdownMenuItem>Subscription</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                <div className="p-2 border-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      Sort By department
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Billing</DropdownMenuItem>
-                      <DropdownMenuItem>Team</DropdownMenuItem>
-                      <DropdownMenuItem>Subscription</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
+              <div className="flex gap-3 ">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="px-4">Sort By department</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Department</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {SelectDepartment.map((department) => (
+                      <DropdownMenuItem
+                      className={`cursor-pointer px-2 ${selectedDepartment === department.value ? "bg-gray-200 dark:bg-gray-700" : ""}`}
+                        key={department.value}
+                        onClick={() => setSelectedDepartment(department.value)}
+                      >
+                        {department.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="px-4">Sort By Salary</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Salary Ranges</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {salaryRanges.map((salariesRange) => (
+                      <DropdownMenuItem
+                        className={`cursor-pointer px-2 ${selectedSalaryRange === salariesRange.value ? "bg-gray-200 dark:bg-gray-700" : ""}`}
+                        key={salariesRange.value}
+                        onClick={() =>
+                          setSelectedSalaryRange(salariesRange.value)
+                        }
+                      >
+                        {salariesRange.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
               </div>
             </div>
             <table className="w-full text-sm text-left">
