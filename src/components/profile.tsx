@@ -19,8 +19,7 @@ type User = {
   name: string;
 };
 
-function Profile()  {
-
+function Profile() {
   const [form, setForm] = useState({ email: "", name: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -28,12 +27,12 @@ function Profile()  {
   const [Users, setUser] = useState<User[]>([]);
   const router = useRouter();
 
-  const handleClick= () =>{
+  const handleClick = () => {
     setFormControls("");
     setError("");
     setSuccess("");
     window.location.reload(); // This will refresh the page
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,7 +47,7 @@ function Profile()  {
     setSuccess(data.success);
     setForm({ email: "", name: "" });
   };
-  
+
   useEffect(() => {
     const fetchUserData = async () => {
       const res = await fetch("/api/testUser");
@@ -60,20 +59,24 @@ function Profile()  {
     fetchUserData().catch((error) => {
       console.error("Error fetching user data:", error);
     });
-  },[]);
+  }, []);
 
   return (
     <div className="md:mx-30">
       <div className="grid grid-cols-3 gap-10 mt-5 ">
-        <AppProfile />
-        <div className="col-span-2">
+        <div className="col-span-3 lg:col-span-1">
+          <AppProfile />
+        </div>
+        <div className="col-span-3 lg:col-span-2 ">
           <Card className="pb-2 ">
             <CardHeader>
               <CardTitle className="ps-2 pb-2 font-bold flex">
                 <UserRoundPen className="me-2 " />
                 Profile Setting
               </CardTitle>
-              <CardDescription>This setting for management your profile</CardDescription>
+              <CardDescription>
+                This setting for management your profile
+              </CardDescription>
             </CardHeader>
           </Card>
           <Card className="mt-3">
@@ -84,9 +87,11 @@ function Profile()  {
                   display: formControls === "" ? "block" : "none",
                 }}
               >
-                <div className="flex">
-                  <div className=" p-20  m-5 rounded-full"><UserCog/></div>
-                  <div className="flex flex-col gap-2 justify-center">
+                <div className="flex flex-col md:flex-row ">
+                  <div className=" p-20  m-5 rounded-full">
+                    <UserCog />
+                  </div>
+                  <div className="flex flex-row md:flex-col gap-2 justify-center mb-5 md:mb-0">
                     <Button>Change Picture</Button>
                     <Button>Delete Picture</Button>
                   </div>
@@ -98,7 +103,7 @@ function Profile()  {
                   display: formControls === "" ? "block" : "none",
                 }}
               >
-                <div className="flex">
+                <div className="flex flex-col  sm:flex-row ">
                   <div className="">
                     <Label>
                       Email :
@@ -113,7 +118,7 @@ function Profile()  {
                       </a>
                     </Label>
                   </div>
-                  <div className="ms-5">
+                  <div className="sm:ms-5 ">
                     <Label>
                       Name :
                       <a className="text-gray-500 font-light">

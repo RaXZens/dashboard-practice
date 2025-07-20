@@ -17,8 +17,6 @@ export async function GET() {
 
     const salaries = salariesresult[0];
     const TotalProducts = result[0];
-    console.debug(TotalProducts);
-    console.debug(salaries);
     return NextResponse.json({ TotalProducts, salaries });
   } catch (error) {
     NextResponse.json({ error: "Internal server error" }, { status: 400 });

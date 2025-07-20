@@ -109,7 +109,7 @@ const UsersPage = () => {
               <div className="flex gap-3 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button className="px-4">Sort By department</Button>
+                    <Button className="px-4">Sort By Department</Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuLabel>Department</DropdownMenuLabel>

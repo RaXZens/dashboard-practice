@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { connection } from "../../../lib/db";
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  {params }:{ params: { id: string } }
 ) {
   if (!connection) {
     console.error("Error: connection failed");
@@ -14,11 +14,8 @@ export async function DELETE(
   }
 
   try {
-    const userId = await params.id;
-    await connection.query("DELETE FROM activities WHERE user_id = ?", [
-      userId,
-    ]);
-    await connection.query("DELETE FROM users WHERE id = ?", [userId]);
+    const {id} = await params;
+    await connection.query("DELETE FROM users WHERE id = ?", [id]);
     return NextResponse.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Failed to delete user:", error);

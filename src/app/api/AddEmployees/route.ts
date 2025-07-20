@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, department, position, salary } = body;
 
-    if (!name || !department || !position || !salary) {
+    if (!name || !department || !position || !salary || salary === 0) {
       return NextResponse.json({ error: "Missing fields." }, { status: 400 });
     }
 
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     }
     if (salary < 5000) {
       return NextResponse.json(
-        { error: "Salary must be a positive number." },
+        { error: "Salary Must not be less than 5000" },
         { status: 400 }
       );
     }

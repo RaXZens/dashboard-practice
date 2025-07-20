@@ -1,14 +1,13 @@
 "use client";
 import {
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
+
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
+import { Bar, BarChart,  Cell, XAxis, YAxis } from "recharts";
 
 const chartConfig = {
   total_salaries: {
@@ -40,7 +39,7 @@ const AppBarChart = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await fetch("/api/products");
+      const response = await fetch("/api/salaries", { method: "GET" });
       if (!response.ok) {
         throw new Error(`HTTP error status : ${response.status}`);
       }

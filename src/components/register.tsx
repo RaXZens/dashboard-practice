@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -11,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavbarPublic from "@/components/ui/navbar";
@@ -64,11 +63,6 @@ export default function RegisterPage() {
           <CardDescription>
             Enter your email below to Register to your account
           </CardDescription>
-          <CardAction>
-            <Button variant="link">
-              <Link href={"/login"}>Login</Link>
-            </Button>
-          </CardAction>
         </CardHeader>
 
         <CardContent>
@@ -126,7 +120,7 @@ export default function RegisterPage() {
                   </Button>
                   <Button variant="outline" type="button" className="w-full">
                     <a className=" w-full" href={"/login"}>
-                      cancel
+                      Cancel
                     </a>
                   </Button>
                 </CardFooter>

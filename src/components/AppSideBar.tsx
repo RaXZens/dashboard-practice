@@ -106,14 +106,8 @@ function AppSideBar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
                   <User2 />{Users[0]?.name}
-                  <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>Account</DropdownMenuItem>
-                <DropdownMenuItem>Setting</DropdownMenuItem>
-                <DropdownMenuItem>Sign out</DropdownMenuItem>
-              </DropdownMenuContent>
+              </DropdownMenuTrigger>             
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
