@@ -5,12 +5,12 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "../ui/chart";
+} from "./ui/chart";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { useEffect, useState } from "react";
 import { debug } from "console";
 
-const colors = ["var(--chart-1)", "var(--chart-2)"];
+const colors = ["var(--chart-1)", "var(--chart-2)","var(--chart-3)", "var(--chart-4)"];
 
 const chartConfig = {
   visitors: {
@@ -43,7 +43,7 @@ type totalusers = {
 };
 type SplitUsers = {
   total_users: number;
-  role: string;
+  position: string;
 };
 
 const AddPieChart = () => {
@@ -68,7 +68,7 @@ const AddPieChart = () => {
 
   return (
     <div className="">
-      <h1 className="text-lg font-md mb-6">Browser Usage</h1>
+      <h1 className="text-lg font-md mb-6">Employee Overview</h1>
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
@@ -81,7 +81,7 @@ const AddPieChart = () => {
           <Pie
             data={splitUsers}
             dataKey="total_users"
-            nameKey="role"
+            nameKey="position"
             cx="50%"
             cy="50%"
             innerRadius={60}
@@ -116,7 +116,7 @@ const AddPieChart = () => {
                         y={(viewBox.cy || 0) + 24}
                         className="fill-muted-foreground"
                       >
-                        Users
+                        Employees
                       </tspan>
                     </text>
                   );
@@ -128,17 +128,17 @@ const AddPieChart = () => {
       </ChartContainer>
       <div className="mt-4 flex flex-col gap-2 items-center ">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Showing total Users
+          Total Employees
           <User className="h-4 w-4 text-green-500" />
         </div>
-        <div className="flex leading-none text-muted-foreground gap-2">
+      </div>
+      <div className="mt-2 text-center leading-none text-muted-foreground gap-2">
           {splitUsers.map((users) => (
-            <p key={users.role}>
-              {users.role} : {users.total_users}{" "}
+            <p className="py-1" key={users.position}>
+              {users.position} : {users.total_users}
             </p>
           ))}
         </div>
-      </div>
     </div>
   );
 };

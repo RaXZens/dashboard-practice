@@ -1,26 +1,21 @@
-
-import AddAreaChart from "@/components/controller/AddAreaChart";
-import AddBarCharts from "@/components/controller/AddBarCharts";
-import AddPieChart from "@/components/controller/AddPieChart";
-import AppBarChart from "@/components/controller/AppBarChart";
 import NavbarPublic from "@/components/ui/navbar";
-import UsersPage from "@/components/controller/Cruid";
-import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/lib/auth";
 
-
-async function Homepage () {
-
+async function Homepage() {
+  const session = await getServerSession(authOption);
+  if (session) {
+    redirect("/dashboard");
+  }
+  if(!session){
+    redirect("/login");
+  }
   return (
-    
     <div className="">
-      <NavbarPublic/>
-
-      </div>
-      
-
-    
+      <NavbarPublic />
+    </div>
   );
-
-;}
+}
 
 export default Homepage;

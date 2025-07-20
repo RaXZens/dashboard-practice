@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import NavbarPublic from "@/components/ui/navbar";
-import { useSession } from "next-auth/react";
+
 
 export default function LoginPage() {
   const router = useRouter();
@@ -70,9 +70,6 @@ export default function LoginPage() {
                 Enter your email below to login to your account
               </CardDescription>
               <CardAction>
-                <Button variant="link">
-                  <Link href={"/register"}>Sign Up</Link>
-                </Button>
               </CardAction>
             </CardHeader>
             <CardContent>
@@ -93,9 +90,6 @@ export default function LoginPage() {
                   <div className="grid gap-2">
                     <div className="flex justify-between">
                       <Label htmlFor="password">Password</Label>
-                      <a href="/" className="text-sm text-gray-500">
-                        Forgot password?
-                      </a>
                     </div>
                     <div className="">
                       <Input
@@ -119,9 +113,8 @@ export default function LoginPage() {
                         )}
                         Login
                       </Button>
-
-                      <Button variant="outline" className="w-full">
-                        Login with Google
+                      <Button variant="outline" type="button" className="w-full">
+                        <a className="w-full" href={"/register"}>Sign Up</a>
                       </Button>
                     </CardFooter>
                   </div>

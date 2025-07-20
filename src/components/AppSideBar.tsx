@@ -18,7 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
-} from "../ui/sidebar";
+} from "./ui/sidebar";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -26,7 +26,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "../ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 import { useEffect, useState } from "react";
 
 const items = [
@@ -106,14 +106,8 @@ function AppSideBar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
                   <User2 />{Users[0]?.name}
-                  <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>Account</DropdownMenuItem>
-                <DropdownMenuItem>Setting</DropdownMenuItem>
-                <DropdownMenuItem>Sign out</DropdownMenuItem>
-              </DropdownMenuContent>
+              </DropdownMenuTrigger>             
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>

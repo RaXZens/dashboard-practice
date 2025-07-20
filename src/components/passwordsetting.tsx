@@ -1,5 +1,5 @@
 "use client";
-import AppProfile from "@/components/controller/AppAccount";
+import AppProfile from "@/components/AppAccount";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -43,8 +43,10 @@ function PasswordSetting() {
   return (
     <div className="md:mx-30">
       <div className="grid grid-cols-3 gap-10 mt-5 ">
-        <AppProfile />
-        <div className="col-span-2">
+        <div className="col-span-3 lg:col-span-1">
+          <AppProfile />
+        </div>
+        <div className="col-span-3 lg:col-span-2">
           <Card className="pb-2 ">
             <CardHeader>
               <CardTitle className="ps-2 pb-2 font-bold flex">

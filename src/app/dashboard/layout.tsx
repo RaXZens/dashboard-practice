@@ -1,5 +1,5 @@
 import NavbarPrivate from "@/components/ui/NavbarPrivate";
-import AppSideBar from "@/components/controller/AppSideBar";
+import AppSideBar from "@/components/AppSideBar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
 import type { Metadata } from "next";

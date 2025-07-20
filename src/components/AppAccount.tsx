@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "./ui/card";
 
 import { KeyRound, UserRoundPen } from "lucide-react";
 import Link from "next/link";
@@ -24,13 +24,13 @@ function AppProfile() {
 
             <Link href={"/dashboard/Account/profile"}>
               {" "}
-              <div className="flex mx-1 mt-2 ps-6 p-2 font-semibold hover:bg-gray-100 rounded-xl dark:hover:bg-neutral-500 cursor-default">
+              <div className="flex mx-1 mt-2 ps-6 p-2 font-semibold hover:bg-gray-100 rounded-xl dark:hover:bg-gray-700 cursor-default">
                 <UserRoundPen className="me-2" /> Profile
               </div>
             </Link>
             <Link href={"/dashboard/Account/password"}>
               {" "}
-              <div className="flex mx-1 mb-2 ps-6 p-2 font-semibold hover:bg-gray-100 rounded-xl dark:hover:bg-neutral-500 cursor-default">
+              <div className="flex mx-1 mb-2 ps-6 p-2 font-semibold hover:bg-gray-100 rounded-xl dark:hover:bg-gray-700 cursor-default">
                 <KeyRound className="me-2" />
                 Password
               </div>

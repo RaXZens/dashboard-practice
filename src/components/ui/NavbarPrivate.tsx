@@ -27,9 +27,7 @@ const Navbar = () => {
 
   return (
     <nav className="p-4 flex items-center justify-between">
-      {/* LEFT */}
       <SidebarTrigger />
-      {/* RIGHT */}
       <div className="flex items-center gap-4">
         <Link href="/dashboard">Dashboard</Link>
         {/* THEMEMENU */}
@@ -69,10 +67,6 @@ const Navbar = () => {
                 Account
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem>
-              <Settings className="h-[1.2rem] w=[1.2rem] mr-2" />
-              Settings
-            </DropdownMenuItem>
             <DropdownMenuItem variant="destructive" onClick={handleLogout}>
               <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" />
               Logout
