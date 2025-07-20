@@ -2,7 +2,6 @@
 import {
   Home,
   User2,
-  ChevronUp,
   Users,
 } from "lucide-react";
 import {
@@ -23,9 +22,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuTrigger,
-  DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { useEffect, useState } from "react";
 

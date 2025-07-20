@@ -1,6 +1,13 @@
 import { connection } from "../../lib/db";
 import { NextResponse } from "next/server";
 
+interface EmployeeData {
+  name: string;
+  department: string;
+  position: string;
+  salary: number;
+}
+
 export async function POST(req: Request) {
   try {
     if (!connection) {
@@ -36,7 +43,7 @@ export async function POST(req: Request) {
       [name, department, position]
     );
 
-    if ((existingUsers as any[]).length > 0) {
+    if ((existingUsers as EmployeeData[]).length > 0) {
       return NextResponse.json(
         { error: "User already exists." },
         { status: 400 }

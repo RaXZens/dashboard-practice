@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card } from "./ui/card";
-import { CircleMinus, Ghost } from "lucide-react";
+import { CircleMinus} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,7 +41,6 @@ const UsersPage = () => {
   const [selectedSalaryRange, setSelectedSalaryRange] = useState<string>("all");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
   const [users, setUsers] = useState<user[]>([]);
-  const [selectedOption, setSelectedOption] = useState<string>("");
 
   const fetchUsers = async () => {
     const response = await fetch("/api/user", { method: "GET" });
@@ -89,7 +88,6 @@ const UsersPage = () => {
       if (res.ok) {
         setUsers(users.filter((user) => user.id !== id)); // อัปเดต state หลังจากลบ
         alert("User deleted successfully");
-        window.location.reload(); // รีเฟรชหน้าเพื่อแสดงผลลัพธ์ที่อัปเดต
       } else {
         alert("Failed to delete user");
       }

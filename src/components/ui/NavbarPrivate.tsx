@@ -1,6 +1,6 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, Moon, Settings, Sun, User, UserCog } from "lucide-react";
+import { Avatar, AvatarFallback} from "@/components/ui/avatar";
+import { LogOut, Moon,  Sun, User, UserCog } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -17,7 +17,7 @@ import { SidebarTrigger } from "./sidebar";
 import { signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const handleLogout = async () => {
     await signOut({
       redirect: true,

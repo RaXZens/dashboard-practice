@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { ChevronLeft, UserCog, UserRoundPen } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 type User = {
   email: string;
@@ -25,7 +24,6 @@ function Profile() {
   const [success, setSuccess] = useState("");
   const [formControls, setFormControls] = useState<"email" | "name" | "">("");
   const [Users, setUser] = useState<User[]>([]);
-  const router = useRouter();
 
   const handleClick = () => {
     setFormControls("");

@@ -2,6 +2,10 @@ import { connection } from "../../lib/db";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
+interface User {
+  email: string;
+}
+
 export async function POST(req: Request) {
   try {
     if (!connection) {
@@ -20,7 +24,7 @@ export async function POST(req: Request) {
       "SELECT * FROM usersid WHERE email = ?",
       [email]
     );
-    if ((users as any[]).length > 0) {
+    if ((users as User[]).length > 0) {
       return NextResponse.json(
         { error: "User already exists." },
         { status: 400 }
@@ -39,8 +43,7 @@ export async function POST(req: Request) {
       [name, email, hashedPassword]
     );
     return NextResponse.json({ success: "Create Account Success." });
-  } catch (error) {
-    console.error("Register Eror", error);
+  } catch {
     return NextResponse.json(
       { error: "internal Server Error." },
       { status: 500 }

@@ -8,7 +8,6 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { Card } from "./ui/card";
 
 const chartConfig = {
   desktop: {

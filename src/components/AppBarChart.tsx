@@ -26,7 +26,7 @@ const COLORS = [
 
 interface totalsalariesByDepartment {
   department: string;
-  total_salaries: number;
+  total_salary: number;
 }
 
 interface totalsalaries {
@@ -44,7 +44,7 @@ const AppBarChart = () => {
         throw new Error(`HTTP error status : ${response.status}`);
       }
       const data = await response.json();
-      const totalsalariesByDepartment = data.TotalProducts.map((item: any) => ({
+      const totalsalariesByDepartment = data.TotalProducts.map((item: totalsalariesByDepartment) => ({
         department: item.department,
         total_salaries: item.total_salary,
       }));

@@ -1,9 +1,9 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { connection } from "../../../lib/db";
 
 export async function DELETE(
-  req: NextRequest,
-  {params }:{ params: { id: string } }
+  req: Request,
+  context: { params: { id: string } }
 ) {
   if (!connection) {
     console.error("Error: connection failed");
@@ -14,7 +14,15 @@ export async function DELETE(
   }
 
   try {
-    const {id} = await params;
+    const params = await context.params;
+    const id = parseInt(params.id);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { message: "Invalid ID provided" },
+        { status: 400 }
+      );
+
+    }
     await connection.query("DELETE FROM users WHERE id = ?", [id]);
     return NextResponse.json({ message: "User deleted successfully" });
   } catch (error) {

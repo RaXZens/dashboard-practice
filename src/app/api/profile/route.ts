@@ -3,6 +3,10 @@ import { connection } from "../../lib/db";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/lib/auth";
 
+interface User {
+  email: string;  
+  name: string;
+}
 
 export async function PUT(req: Request) {
   try {
@@ -33,7 +37,7 @@ export async function PUT(req: Request) {
         "SELECT * FROM usersid WHERE email = ?",
         [email]
       );
-      if ((users as any[]).length > 0) {
+      if ((users as User[]).length > 0) {
         return NextResponse.json(
           { error: "User already exists." },
           { status: 400 }

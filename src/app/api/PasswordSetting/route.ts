@@ -4,6 +4,11 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/lib/auth";
 
+
+interface Userpasssword{
+  password: string;
+}
+
 export async function POST(req: Request) {
   try {
     if (!connection) {
@@ -36,7 +41,7 @@ export async function POST(req: Request) {
     );
 
 
-    const Oldpassword = (CheckOldpassword as any[])[0].password;
+    const Oldpassword = (CheckOldpassword as Userpasssword[])[0].password;
 
     const CheckCompareOldPassword = await bcrypt.compare(
       currentPassword,
@@ -55,7 +60,7 @@ export async function POST(req: Request) {
     await connection.query(query, [hashedPassword, session.user.id]);
 
     return NextResponse.json({ success: "Update Success." });
-  } catch (error) {
+  } catch {
     NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

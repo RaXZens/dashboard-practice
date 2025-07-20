@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -10,13 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavbarPublic from "@/components/ui/navbar";
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [form, setForm] = useState({
     email: "",
     password: "",

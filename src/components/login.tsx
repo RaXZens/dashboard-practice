@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -14,14 +14,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useTheme } from "next-themes";
 import NavbarPublic from "@/components/ui/navbar";
 
 
 export default function LoginPage() {
   const router = useRouter();
-  const theme = useTheme();
   const [Error, setError] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);

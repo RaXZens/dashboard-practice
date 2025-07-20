@@ -1,8 +1,14 @@
-import NextAuth, { NextAuthOptions, User } from "next-auth";
+import { NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connection } from "./db";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
 export const authOption: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -12,7 +18,7 @@ export const authOption: NextAuthOptions = {
           label: "Email",
           type: "text",
         },
-        password: { label: "Passworad", type: "password" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         console.debug("Trying to login with", credentials);
@@ -23,7 +29,7 @@ export const authOption: NextAuthOptions = {
           "SELECT id, name, email, password from usersid WHERE email= ?",
           [credentials.email]
         );
-        const user = (rows as any[])[0];
+        const user = (rows as User[])[0];
 
         if (!user || !user.password) {
           return null;

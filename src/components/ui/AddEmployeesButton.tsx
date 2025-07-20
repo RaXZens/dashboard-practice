@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "./button";
@@ -9,7 +9,7 @@ function AddEmployeesButton() {
     name: "",
     department: "",
     position: "",
-    salary: Number(""),
+    salary: 0,
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");

@@ -23,7 +23,7 @@ export async function GET() {
     const result = await connection.query("SELECT email,name FROM usersid WHERE id = ?;",[session.user.id]);
     const data = result[0]
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     NextResponse.json({ error: "Internal server error" }, { status: 400 });
   }
 }

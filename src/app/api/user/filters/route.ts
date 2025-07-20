@@ -5,7 +5,7 @@ export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const salariesRange = url.searchParams.get("salariesRange");
-    let department = url.searchParams.get("department");
+    const department = url.searchParams.get("department");
 
     if (!connection) {
       console.error("Error: connection failed");
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     }
     let query =
       "SELECT u.id, u.name, u.email, u.department, u.position, s.salary FROM users u JOIN salaries s ON u.id = s.user_id ";
-    const params: Array<any> = [];
+    const params: Array<string|number> = [];
     if (salariesRange && salariesRange !== "all") {
       if (salariesRange === "60000<") {
         query += "WHERE s.salary >= ? ";

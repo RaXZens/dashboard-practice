@@ -1,5 +1,5 @@
 "use client";
-import { TrendingUp, User } from "lucide-react";
+import {  User } from "lucide-react";
 import {
   ChartConfig,
   ChartContainer,
@@ -8,7 +8,6 @@ import {
 } from "./ui/chart";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { useEffect, useState } from "react";
-import { debug } from "console";
 
 const colors = ["var(--chart-1)", "var(--chart-2)","var(--chart-3)", "var(--chart-4)"];
 
