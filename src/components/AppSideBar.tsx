@@ -33,8 +33,8 @@ const items = [
     icon: Home,
   },
   {
-    title: "Cruid",
-    url: "/dashboard/cruid",
+    title: "CRUDid",
+    url: "/dashboard/CRUDid",
     icon: Users,
   },
 ];
